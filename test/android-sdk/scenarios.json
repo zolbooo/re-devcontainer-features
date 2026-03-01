@@ -15,5 +15,14 @@
                 "wanted_emulators": "pixel34=system-images;android-34;google_apis;x86_64"
             }
         }
+    },
+    "preexisting_latest": {
+        "build": {
+            "dockerfile": "Dockerfile",
+            "context": "."
+        },
+        "features": {
+            "android-sdk": {}
+        }
     }
 }

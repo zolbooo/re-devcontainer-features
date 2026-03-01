@@ -1,11 +1,12 @@
 {
     "name": "Android SDK",
     "id": "android-sdk",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Install Android SDK `cmdline-tools`, `platform-tools`, and, `build-tools`.",
     "containerEnv": {
         "ANDROID_HOME": "/usr/local/lib/android",
         "ANDROID_SDK_ROOT": "$ANDROID_HOME",
+        "ANDROID_AVD_HOME": "$ANDROID_HOME/avd",
         "PATH": "$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:/usr/local/lib/android-build-tools"
     },
     "options": {

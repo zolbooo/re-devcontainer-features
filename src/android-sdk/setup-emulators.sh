@@ -2,10 +2,14 @@
 set -eu
 
 wanted_emulators="${WANTED_EMULATORS:-}"
+avd_home="${ANDROID_AVD_HOME:-${HOME}/.android/avd}"
 
 if [ -z "${wanted_emulators}" ]; then
     exit 0
 fi
+
+mkdir -p "${avd_home}"
+export ANDROID_AVD_HOME="${avd_home}"
 
 IFS=' ' read -r -a entries <<< "${wanted_emulators}"
 
@@ -66,7 +70,7 @@ for i in "${!avd_names[@]}"; do
     package="${avd_packages[$i]}"
     echo "no" | avdmanager create avd -n "${name}" -k "${package}" --force
 
-    avd_dir="${HOME}/.android/avd/${name}.avd"
+    avd_dir="${ANDROID_AVD_HOME}/${name}.avd"
     if [ ! -d "${avd_dir}" ]; then
         echo "ERROR: Failed to create AVD '${name}'. Missing directory: ${avd_dir}." >&2
         exit 1
