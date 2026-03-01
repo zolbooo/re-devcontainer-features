@@ -1,0 +1,20 @@
+{
+    "name": "JADX",
+    "id": "jadx",
+    "version": "1.0.0",
+    "description": "Install JADX CLI and GUI from official GitHub releases.",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "1.5.5",
+            "proposals": ["1.5.5", "1.5.4", "1.5.3"],
+            "description": "JADX release version"
+        }
+    },
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "17"
+        }
+    },
+    "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

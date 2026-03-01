@@ -1,0 +1,10 @@
+{
+    "specific_version": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "jadx": {
+                "version": "1.5.4"
+            }
+        }
+    }
+}

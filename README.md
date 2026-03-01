@@ -8,3 +8,7 @@ Collection of `.devcontainer` features for Android reverse engineering. A fork o
 
 Setup and update the Android SDK. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/master/src/android-sdk).
 
+### `ghcr.io/zolbooo/android-devcontainer-features/jadx:1`
+
+Install JADX CLI and GUI from official GitHub releases. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/master/src/jadx).
+
