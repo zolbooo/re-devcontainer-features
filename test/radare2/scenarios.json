@@ -1,0 +1,10 @@
+{
+    "specific_version": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "radare2": {
+                "version": "6.0.8"
+            }
+        }
+    }
+}

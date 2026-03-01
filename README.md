@@ -16,3 +16,7 @@ Install Apktool CLI from official GitHub releases. [View source](https://github.
 
 Install JADX CLI and GUI from official GitHub releases. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/jadx).
 
+### `ghcr.io/zolbooo/android-devcontainer-features/radare2:1`
+
+Install Radare2 CLI from official GitHub releases. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/radare2).
+
