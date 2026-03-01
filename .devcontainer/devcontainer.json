@@ -5,21 +5,19 @@
             "settings": {
                 "json.schemas": [
                     {
-                        "fileMatch": [
-                            "*/devcontainer-feature.json"
-                        ],
+                        "fileMatch": ["*/devcontainer-feature.json"],
                         "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
                     }
                 ]
             },
-            "extensions": [
-                "mads-hartmann.bash-ide-vscode"
-            ]
+            "extensions": ["mads-hartmann.bash-ide-vscode"]
         }
     },
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
     "remoteUser": "node",
-    "updateContentCommand": "npm install -g @devcontainers/cli"
+    "updateContentCommand": "npm install -g @devcontainers/cli",
+    "mounts": ["source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind"],
+    "postCreateCommand": "npm i -g @openai/codex"
 }
