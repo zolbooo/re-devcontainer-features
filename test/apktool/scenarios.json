@@ -1,0 +1,10 @@
+{
+    "specific_version": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "apktool": {
+                "version": "2.12.1"
+            }
+        }
+    }
+}
