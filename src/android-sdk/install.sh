@@ -61,6 +61,9 @@ yes | sdkmanager "${PACKAGES[@]}"
 # Restore JAVA_HOME.
 export JAVA_HOME=$OG_JAVA_HOME
 
+# Expose a stable build-tools path for PATH exports.
+sudo ln -sfn "$ANDROID_HOME/build-tools/$BUILD_TOOLS" /usr/local/lib/android-build-tools
+
 # Make sure the Android SDK has the correct permissions.
 sudo chown -R "$_REMOTE_USER:$_REMOTE_USER" "$ANDROID_HOME"
 
