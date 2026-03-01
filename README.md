@@ -12,6 +12,10 @@ Setup and update the Android SDK. [View source](https://github.com/zolbooo/andro
 
 Install Apktool CLI from official GitHub releases. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/apktool).
 
+### `ghcr.io/zolbooo/android-devcontainer-features/frida:1`
+
+Install Frida CLI/tools and Android Frida server or gadget artifacts. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/frida).
+
 ### `ghcr.io/zolbooo/android-devcontainer-features/jadx:1`
 
 Install JADX CLI and GUI from official GitHub releases. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/jadx).

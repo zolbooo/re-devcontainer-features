@@ -1,0 +1,36 @@
+{
+    "name": "Frida",
+    "id": "frida",
+    "version": "1.0.0",
+    "description": "Install Frida CLI/tools and Android Frida server or gadget artifacts.",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "17.7.3",
+            "proposals": ["17.7.3", "17.7.2", "17.7.1"],
+            "description": "Frida core release version"
+        },
+        "tools_version": {
+            "type": "string",
+            "default": "14.6.0",
+            "proposals": ["14.6.0", "14.5.2", "14.5.1"],
+            "description": "frida-tools PyPI version"
+        },
+        "android_arch": {
+            "type": "string",
+            "default": "arm64",
+            "proposals": ["arm64", "arm", "x86_64", "x86"],
+            "description": "Android architecture for downloaded Frida artifact"
+        },
+        "android_artifact": {
+            "type": "string",
+            "default": "server",
+            "proposals": ["server", "gadget"],
+            "description": "Android artifact type to install"
+        }
+    },
+    "dependsOn": {
+        "ghcr.io/zolbooo/android-devcontainer-features/android-sdk:1": {}
+    },
+    "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

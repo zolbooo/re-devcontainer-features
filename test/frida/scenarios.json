@@ -1,0 +1,22 @@
+{
+    "specific_version": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "frida": {
+                "version": "17.7.2",
+                "tools_version": "14.5.2",
+                "android_arch": "x86_64",
+                "android_artifact": "server"
+            }
+        }
+    },
+    "gadget_artifact": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "frida": {
+                "android_arch": "arm64",
+                "android_artifact": "gadget"
+            }
+        }
+    }
+}
