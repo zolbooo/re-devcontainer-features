@@ -12,13 +12,17 @@ jobs:
         runs-on: ubuntu-latest
         outputs:
             features: ${{ steps.discover.outputs.features }}
+            has_features: ${{ steps.discover.outputs.has_features }}
         steps:
             - uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
 
             - name: 'Discover features from test directories'
               id: discover
               run: |
                   node <<'NODE'
+                  const childProcess = require('child_process');
                   const fs = require('fs');
                   const path = require('path');
 
@@ -26,6 +30,9 @@ jobs:
                   const testRoot = path.join(repoRoot, 'test');
                   const srcRoot = path.join(repoRoot, 'src');
                   const outputPath = process.env.GITHUB_OUTPUT;
+                  const eventName = process.env.GITHUB_EVENT_NAME || '';
+                  const eventPath = process.env.GITHUB_EVENT_PATH;
+                  const currentSha = process.env.GITHUB_SHA || '';
 
                   if (!outputPath) {
                       console.error('GITHUB_OUTPUT is not set.');
@@ -60,13 +67,98 @@ jobs:
                       process.exit(1);
                   }
 
-                  const payload = JSON.stringify(features);
+                  const featureSet = new Set(features);
+
+                  function runGitCommand(command) {
+                      return childProcess.execSync(command, { encoding: 'utf8' }).trim();
+                  }
+
+                  function splitChangedFiles(output) {
+                      if (!output) {
+                          return [];
+                      }
+
+                      return output
+                          .split('\n')
+                          .map((line) => line.trim())
+                          .filter(Boolean);
+                  }
+
+                  let event = {};
+                  if (eventPath && fs.existsSync(eventPath)) {
+                      event = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
+                  }
+
+                  let selectedFeatures = features;
+                  let changedFiles = [];
+
+                  if (eventName === 'workflow_dispatch') {
+                      selectedFeatures = features;
+                  } else if (eventName === 'pull_request') {
+                      const baseSha = event.pull_request?.base?.sha;
+                      const headSha = event.pull_request?.head?.sha;
+
+                      if (!baseSha || !headSha) {
+                          console.error('Missing pull request base/head SHAs in event payload.');
+                          process.exit(1);
+                      }
+
+                      changedFiles = splitChangedFiles(runGitCommand(`git diff --name-only ${baseSha} ${headSha}`));
+                  } else if (eventName === 'push') {
+                      const beforeSha = event.before;
+                      const isInitialPush = !beforeSha || /^0+$/.test(beforeSha);
+
+                      if (isInitialPush) {
+                          if (!currentSha) {
+                              console.error('GITHUB_SHA is not set for push event.');
+                              process.exit(1);
+                          }
+
+                          changedFiles = splitChangedFiles(
+                              runGitCommand(`git diff-tree --no-commit-id --name-only -r ${currentSha}`),
+                          );
+                      } else {
+                          changedFiles = splitChangedFiles(runGitCommand(`git diff --name-only ${beforeSha} ${currentSha}`));
+                      }
+                  } else {
+                      changedFiles = splitChangedFiles(runGitCommand('git diff --name-only HEAD~1 HEAD'));
+                  }
+
+                  if (eventName !== 'workflow_dispatch') {
+                      const changedFeatureSet = new Set();
+                      const featurePattern = /^(src|test)\/([^/]+)\//;
+
+                      for (const changedFile of changedFiles) {
+                          const match = changedFile.match(featurePattern);
+                          if (!match) {
+                              continue;
+                          }
+
+                          const feature = match[2];
+                          if (featureSet.has(feature)) {
+                              changedFeatureSet.add(feature);
+                          }
+                      }
+
+                      selectedFeatures = Array.from(changedFeatureSet).sort((a, b) => a.localeCompare(b));
+                  }
+
+                  const payload = JSON.stringify(selectedFeatures);
+                  const hasFeatures = selectedFeatures.length > 0 ? 'true' : 'false';
                   fs.appendFileSync(outputPath, `features=${payload}\n`, 'utf8');
-                  console.log(`Discovered features: ${payload}`);
+                  fs.appendFileSync(outputPath, `has_features=${hasFeatures}\n`, 'utf8');
+
+                  if (eventName === 'workflow_dispatch') {
+                      console.log(`Manual dispatch selected all features: ${payload}`);
+                  } else {
+                      console.log(`Changed files (${changedFiles.length}): ${JSON.stringify(changedFiles)}`);
+                      console.log(`Selected changed features: ${payload}`);
+                  }
                   NODE
 
     test-autogenerated:
         needs: discover-features
+        if: needs.discover-features.outputs.has_features == 'true'
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -84,6 +176,7 @@ jobs:
 
     test-scenarios:
         needs: discover-features
+        if: needs.discover-features.outputs.has_features == 'true'
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -96,3 +189,13 @@ jobs:
 
             - name: "Generating tests for '${{ matrix.features }}' scenarios"
               run: devcontainer features test -f ${{ matrix.features }} --skip-autogenerated --skip-duplicated .
+
+    no-feature-changes:
+        needs: discover-features
+        if: needs.discover-features.outputs.has_features != 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'No changed features detected'
+              run: |
+                  echo "No feature-scoped changes were detected in src/<feature> or test/<feature>."
+                  echo "Skipping autogenerated and scenario tests."
