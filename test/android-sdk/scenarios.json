@@ -7,5 +7,13 @@
                 "extra_packages": "ndk;25.2.9519653 sources;android-32"
             }
         }
+    },
+    "wanted_emulators": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "android-sdk": {
+                "wanted_emulators": "pixel34=system-images;android-34;google_apis;x86_64"
+            }
+        }
     }
 }

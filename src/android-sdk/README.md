@@ -11,6 +11,14 @@ Install Android SDK `cmdline-tools`, `platform-tools`, and, `build-tools`.
 }
 ```
 
+```json
+"features": {
+    "ghcr.io/zolbooo/android-devcontainer-features/android-sdk:1": {
+        "wanted_emulators": "pixel34=system-images;android-34;google_apis;x86_64"
+    }
+}
+```
+
 ## Options
 
 | Options Id | Description | Type | Default Value |
@@ -19,6 +27,7 @@ Install Android SDK `cmdline-tools`, `platform-tools`, and, `build-tools`.
 | build_tools | SDK build-tools version | string | 34.0.0 |
 | base_packages | packages will override default packages, split by space | string | - |
 | extra_packages | extra packages, split by space | string | - |
+| wanted_emulators | space-separated entries in name=system-image-package format | string | - |
 
 
 

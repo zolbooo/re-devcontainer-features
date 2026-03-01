@@ -2,6 +2,7 @@
 set -e
 set +H
 
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 URL_SDK="https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip"
 
 # Options.
@@ -57,6 +58,10 @@ export JAVA_HOME=$(dirname $(dirname $(update-alternatives --list javac 2>&1 | h
 # yes | sdkmanager "cmdline-tools;latest"
 # Download the platform tools.
 yes | sdkmanager "${PACKAGES[@]}"
+
+if [ -n "${WANTED_EMULATORS:-}" ]; then
+    "$SCRIPT_DIR/setup-emulators.sh"
+fi
 
 # Restore JAVA_HOME.
 export JAVA_HOME=$OG_JAVA_HOME

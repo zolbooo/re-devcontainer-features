@@ -6,7 +6,7 @@
     "containerEnv": {
         "ANDROID_HOME": "/usr/local/lib/android",
         "ANDROID_SDK_ROOT": "$ANDROID_HOME",
-        "PATH": "$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:/usr/local/lib/android-build-tools"
+        "PATH": "$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:/usr/local/lib/android-build-tools"
     },
     "options": {
         "platform": {
@@ -28,6 +28,11 @@
             "type": "string",
             "default": "",
             "description": "extra packages, split by space"
+        },
+        "wanted_emulators": {
+            "type": "string",
+            "default": "",
+            "description": "space-separated entries in name=system-image-package format"
         }
     },
     "installsAfter": ["ghcr.io/devcontainers/features/common-utils", "ghcr.io/akhildevelops/devcontainer-features/apt"]
