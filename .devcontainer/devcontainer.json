@@ -1,5 +1,5 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bullseye",
     "customizations": {
         "vscode": {
             "settings": {
@@ -18,6 +18,6 @@
     },
     "remoteUser": "node",
     "updateContentCommand": "npm install -g @devcontainers/cli",
-    "mounts": ["source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind"],
+    "mounts": ["source=${localEnv:HOME}/.codex,target=/home/node/.codex,type=bind"],
     "postCreateCommand": "npm i -g @openai/codex"
 }
