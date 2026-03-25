@@ -1,0 +1,15 @@
+{
+    "name": "Blutter",
+    "id": "blutter",
+    "version": "1.0.0",
+    "description": "Install Blutter Flutter reverse engineering tool from source.",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "latest",
+            "proposals": ["latest"],
+            "description": "Git ref (tag, branch, or commit hash). Use 'latest' for HEAD of master."
+        }
+    },
+    "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}
