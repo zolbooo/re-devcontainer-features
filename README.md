@@ -24,3 +24,7 @@ Install JADX CLI and GUI from official GitHub releases. [View source](https://gi
 
 Install Radare2 CLI from official GitHub releases. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/radare2).
 
+### `ghcr.io/zolbooo/android-devcontainer-features/blutter:1`
+
+Install Blutter Flutter reverse engineering tool from source. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/blutter).
+
