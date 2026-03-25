@@ -16,6 +16,12 @@
             "proposals": ["14.6.0", "14.5.2", "14.5.1"],
             "description": "frida-tools PyPI version"
         },
+        "objection_version": {
+            "type": "string",
+            "default": "1.11.0",
+            "proposals": ["1.11.0", "1.10.0", "1.9.6"],
+            "description": "objection PyPI version (set to 'none' to skip)"
+        },
         "android_arch": {
             "type": "string",
             "default": "arm64",

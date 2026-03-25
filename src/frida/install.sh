@@ -3,6 +3,7 @@ set -euo pipefail
 
 VERSION="${VERSION:-17.7.3}"
 TOOLS_VERSION="${TOOLS_VERSION:-14.6.0}"
+OBJECTION_VERSION="${OBJECTION_VERSION:-1.11.0}"
 ANDROID_ARCH="${ANDROID_ARCH:-arm64}"
 ANDROID_ARTIFACT="${ANDROID_ARTIFACT:-server}"
 
@@ -87,9 +88,14 @@ fi
 
 echo "${ASSET_SHA256}  ${ASSET_PATH}" | sha256sum -c -
 
-if ! pip3 install --no-cache-dir "frida==${VERSION}" "frida-tools==${TOOLS_VERSION}"; then
-    if ! pip3 install --no-cache-dir --break-system-packages "frida==${VERSION}" "frida-tools==${TOOLS_VERSION}"; then
-        echo "ERROR: Failed to install Python packages frida==${VERSION} and frida-tools==${TOOLS_VERSION}." >&2
+PIP_PACKAGES=("frida==${VERSION}" "frida-tools==${TOOLS_VERSION}")
+if [[ "${OBJECTION_VERSION}" != "none" ]]; then
+    PIP_PACKAGES+=("objection==${OBJECTION_VERSION}")
+fi
+
+if ! pip3 install --no-cache-dir "${PIP_PACKAGES[@]}"; then
+    if ! pip3 install --no-cache-dir --break-system-packages "${PIP_PACKAGES[@]}"; then
+        echo "ERROR: Failed to install Python packages: ${PIP_PACKAGES[*]}." >&2
         exit 1
     fi
 fi
