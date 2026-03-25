@@ -4,6 +4,7 @@ set -e
 source dev-container-features-test-lib
 
 check "libX11 runtime available" bash -c "ldconfig -p | grep -q 'libX11.so.6'"
+check "libX11-xcb runtime available" bash -c "ldconfig -p | grep -q 'libX11-xcb.so.1'"
 check "libpulse runtime available" bash -c "ldconfig -p | grep -q 'libpulse.so.0'"
 check "libpng runtime available" bash -c "ldconfig -p | grep -q 'libpng16.so.16'"
 check "libxkbfile runtime available" bash -c "ldconfig -p | grep -q 'libxkbfile.so.1'"
