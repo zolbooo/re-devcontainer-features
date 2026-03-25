@@ -1,0 +1,29 @@
+{
+    "name": "Android NDK",
+    "id": "android-ndk",
+    "version": "1.0.0",
+    "description": "Install Android NDK cross-compilation toolchain for building native ARM64 libraries.",
+    "containerEnv": {
+        "ANDROID_NDK_HOME": "/usr/local/lib/android-ndk/current",
+        "CMAKE_TOOLCHAIN_FILE": "/usr/local/lib/android-ndk/current/build/cmake/android.toolchain.cmake",
+        "PATH": "$PATH:/usr/local/lib/android-ndk/current/toolchains/llvm/prebuilt/linux-x86_64/bin"
+    },
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "r27c",
+            "proposals": ["r27c", "r27b", "r26d"],
+            "description": "NDK release version (e.g. r27c, r26d)"
+        },
+        "api_level": {
+            "type": "string",
+            "default": "24",
+            "proposals": ["21", "24", "26", "28", "30", "33", "34"],
+            "description": "Minimum Android API level for cross-compilation"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/zolbooo/android-devcontainer-features/android-sdk:1"
+    ]
+}

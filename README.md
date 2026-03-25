@@ -28,3 +28,7 @@ Install Radare2 CLI from official GitHub releases. [View source](https://github.
 
 Install Blutter Flutter reverse engineering tool from source. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/blutter).
 
+### `ghcr.io/zolbooo/android-devcontainer-features/android-ndk:1`
+
+Install Android NDK cross-compilation toolchain for building native ARM64 libraries. [View source](https://github.com/zolbooo/android-devcontainer-features/tree/main/src/android-ndk).
+

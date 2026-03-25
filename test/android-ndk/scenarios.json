@@ -1,0 +1,11 @@
+{
+    "older_ndk": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "android-ndk": {
+                "version": "r26d",
+                "api_level": "21"
+            }
+        }
+    }
+}
