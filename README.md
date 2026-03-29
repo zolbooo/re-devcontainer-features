@@ -2,40 +2,54 @@
 
 Collection of `.devcontainer` features for Android reverse engineering. A fork of [NordcomInc/devcontainer-features](https://github.com/NordcomInc/devcontainer-features).
 
+## Table of Contents
+
+- [General](#general)
+  - [Ghidra](#ghidra)
+  - [Radare2](#radare2)
+  - [Frida](#frida)
+- [Android](#android)
+  - [Android SDK](#android-sdk)
+  - [Android NDK](#android-ndk)
+  - [Apktool](#apktool)
+  - [JADX](#jadx)
+- [Flutter](#flutter)
+  - [Blutter](#blutter)
+
 ## General
 
-### `ghcr.io/zolbooo/re-devcontainer-features/ghidra:1`
+### <a id="ghidra">`ghcr.io/zolbooo/re-devcontainer-features/ghidra:1`</a>
 
 Install Ghidra reverse engineering framework from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/ghidra).
 
-### `ghcr.io/zolbooo/re-devcontainer-features/radare2:1`
+### <a id="radare2">`ghcr.io/zolbooo/re-devcontainer-features/radare2:1`</a>
 
 Install Radare2 CLI from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/radare2).
 
-### `ghcr.io/zolbooo/re-devcontainer-features/frida:1`
+### <a id="frida">`ghcr.io/zolbooo/re-devcontainer-features/frida:1`</a>
 
 Install Frida CLI/tools and Android Frida server or gadget artifacts. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/frida).
 
 ## Android
 
-### `ghcr.io/zolbooo/re-devcontainer-features/android-sdk:1`
+### <a id="android-sdk">`ghcr.io/zolbooo/re-devcontainer-features/android-sdk:1`</a>
 
 Setup and update the Android SDK. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/android-sdk).
 
-### `ghcr.io/zolbooo/re-devcontainer-features/android-ndk:1`
+### <a id="android-ndk">`ghcr.io/zolbooo/re-devcontainer-features/android-ndk:1`</a>
 
 Install Android NDK cross-compilation toolchain for building native ARM64 libraries. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/android-ndk).
 
-### `ghcr.io/zolbooo/re-devcontainer-features/apktool:1`
+### <a id="apktool">`ghcr.io/zolbooo/re-devcontainer-features/apktool:1`</a>
 
 Install Apktool CLI from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/apktool).
 
-### `ghcr.io/zolbooo/re-devcontainer-features/jadx:1`
+### <a id="jadx">`ghcr.io/zolbooo/re-devcontainer-features/jadx:1`</a>
 
 Install JADX CLI and GUI from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/jadx).
 
 ## Flutter
 
-### `ghcr.io/zolbooo/re-devcontainer-features/blutter:1`
+### <a id="blutter">`ghcr.io/zolbooo/re-devcontainer-features/blutter:1`</a>
 
 Install Blutter - Flutter reverse engineering tool from source. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/blutter).
