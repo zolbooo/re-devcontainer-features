@@ -22,6 +22,8 @@ Collection of `.devcontainer` features for reverse engineering. A fork of [Nordc
 
 Install Ghidra reverse engineering framework from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/ghidra).
 
+After installation, both `ghidra` (GUI launcher) and `analyzeHeadless` (headless analysis script) will be available on `PATH`.
+
 ### <a id="radare2">`ghcr.io/zolbooo/re-devcontainer-features/radare2:1`</a>
 
 Install Radare2 CLI from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/radare2).
