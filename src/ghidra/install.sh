@@ -86,6 +86,8 @@ INNER_DIR="$(find "${EXTRACT_DIR}" -mindepth 1 -maxdepth 1 -type d | head -n 1)"
 mv "${INNER_DIR}" "${VERSION_DIR}/ghidra"
 
 chmod +x "${VERSION_DIR}/ghidra/ghidraRun"
+chmod +x "${VERSION_DIR}/ghidra/support/analyzeHeadless"
 
 ln -sfn "${VERSION_DIR}" "${CURRENT_LINK}"
 ln -sfn "${CURRENT_LINK}/ghidra/ghidraRun" /usr/local/bin/ghidra
+ln -sfn "${CURRENT_LINK}/ghidra/support/analyzeHeadless" /usr/local/bin/analyzeHeadless
