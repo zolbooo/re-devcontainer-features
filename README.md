@@ -1,6 +1,6 @@
 # devcontainer-features
 
-Collection of `.devcontainer` features for Android reverse engineering. A fork of [NordcomInc/devcontainer-features](https://github.com/NordcomInc/devcontainer-features).
+Collection of `.devcontainer` features for reverse engineering. A fork of [NordcomInc/devcontainer-features](https://github.com/NordcomInc/devcontainer-features).
 
 ## Table of Contents
 
