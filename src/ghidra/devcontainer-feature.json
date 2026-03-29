@@ -1,7 +1,7 @@
 {
     "name": "Ghidra",
     "id": "ghidra",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Install Ghidra reverse engineering framework from official GitHub releases.",
     "options": {
         "version": {
