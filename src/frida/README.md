@@ -6,7 +6,7 @@ Install Frida CLI/tools and Android Frida server or gadget artifacts.
 
 ```json
 "features": {
-    "ghcr.io/zolbooo/android-devcontainer-features/frida:1": {}
+    "ghcr.io/zolbooo/re-devcontainer-features/frida:1": {}
 }
 ```
 
@@ -35,4 +35,4 @@ adb shell "chmod 755 /data/local/tmp/frida-server && /data/local/tmp/frida-serve
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zolbooo/android-devcontainer-features/blob/main/src/frida/devcontainer-feature.json). Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zolbooo/re-devcontainer-features/blob/main/src/frida/devcontainer-feature.json). Add additional notes to a `NOTES.md`._

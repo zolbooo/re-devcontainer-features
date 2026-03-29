@@ -6,7 +6,7 @@ Install Apktool CLI from official GitHub releases.
 
 ```json
 "features": {
-    "ghcr.io/zolbooo/android-devcontainer-features/apktool:1": {}
+    "ghcr.io/zolbooo/re-devcontainer-features/apktool:1": {}
 }
 ```
 
@@ -20,4 +20,4 @@ Install Apktool CLI from official GitHub releases.
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zolbooo/android-devcontainer-features/blob/master/src/apktool/devcontainer-feature.json). Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zolbooo/re-devcontainer-features/blob/master/src/apktool/devcontainer-feature.json). Add additional notes to a `NOTES.md`._

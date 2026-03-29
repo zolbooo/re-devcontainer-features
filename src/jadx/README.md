@@ -6,7 +6,7 @@ Install JADX CLI and GUI from official GitHub releases.
 
 ```json
 "features": {
-    "ghcr.io/zolbooo/android-devcontainer-features/jadx:1": {}
+    "ghcr.io/zolbooo/re-devcontainer-features/jadx:1": {}
 }
 ```
 
@@ -20,4 +20,4 @@ Install JADX CLI and GUI from official GitHub releases.
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zolbooo/android-devcontainer-features/blob/master/src/jadx/devcontainer-feature.json). Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zolbooo/re-devcontainer-features/blob/master/src/jadx/devcontainer-feature.json). Add additional notes to a `NOTES.md`._

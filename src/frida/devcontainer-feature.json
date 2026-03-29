@@ -36,7 +36,7 @@
         }
     },
     "dependsOn": {
-        "ghcr.io/zolbooo/android-devcontainer-features/android-sdk:1": {}
+        "ghcr.io/zolbooo/re-devcontainer-features/android-sdk:1": {}
     },
     "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
 }
