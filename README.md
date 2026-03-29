@@ -32,3 +32,7 @@ Install Blutter Flutter reverse engineering tool from source. [View source](http
 
 Install Android NDK cross-compilation toolchain for building native ARM64 libraries. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/android-ndk).
 
+### `ghcr.io/zolbooo/re-devcontainer-features/ghidra:1`
+
+Install Ghidra reverse engineering framework from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/ghidra).
+

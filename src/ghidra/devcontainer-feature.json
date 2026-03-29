@@ -1,0 +1,20 @@
+{
+    "name": "Ghidra",
+    "id": "ghidra",
+    "version": "1.0.0",
+    "description": "Install Ghidra reverse engineering framework from official GitHub releases.",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "12.0.4",
+            "proposals": ["12.0.4", "12.0.3", "12.0.2"],
+            "description": "Ghidra release version"
+        }
+    },
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "21"
+        }
+    },
+    "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}
