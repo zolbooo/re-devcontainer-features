@@ -13,9 +13,8 @@ Collection of `.devcontainer` features for reverse engineering. A fork of [Nordc
     - [Android NDK](#android-ndk)
     - [Apktool](#apktool)
     - [JADX](#jadx)
-- [Flutter](#flutter)
-    - [Blutter](#blutter)
 - [Frameworks](#frameworks)
+    - [Flutter](#flutter-feature)
     - [React Native](#react-native-feature)
 
 ## General
@@ -52,13 +51,11 @@ Install Apktool CLI from official GitHub releases. [View source](https://github.
 
 Install JADX CLI and GUI from official GitHub releases. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/jadx).
 
-## Flutter
-
-### <a id="blutter">`ghcr.io/zolbooo/re-devcontainer-features/blutter:1`</a>
-
-Install Blutter - Flutter reverse engineering tool from source. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/blutter).
-
 ## Frameworks
+
+### <a id="flutter-feature">`ghcr.io/zolbooo/re-devcontainer-features/flutter:1`</a>
+
+Install the Blutter Flutter reverse engineering tool from source. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/flutter).
 
 ### <a id="react-native-feature">`ghcr.io/zolbooo/re-devcontainer-features/react-native:1`</a>
 

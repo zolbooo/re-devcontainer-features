@@ -1,8 +1,8 @@
 {
-    "name": "Blutter",
-    "id": "blutter",
+    "name": "Flutter",
+    "id": "flutter",
     "version": "1.0.0",
-    "description": "Install Blutter Flutter reverse engineering tool from source.",
+    "description": "Install the Blutter Flutter reverse engineering tool from source.",
     "options": {
         "version": {
             "type": "string",
