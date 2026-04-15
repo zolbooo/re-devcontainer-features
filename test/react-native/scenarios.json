@@ -1,0 +1,16 @@
+{
+    "default": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "react-native": {}
+        }
+    },
+    "specific_uv_version": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "react-native": {
+                "uv_version": "0.11.6"
+            }
+        }
+    }
+}

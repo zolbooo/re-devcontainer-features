@@ -1,0 +1,28 @@
+{
+    "name": "React Native",
+    "id": "react-native",
+    "version": "1.0.0",
+    "description": "Install Node.js, uv, and hermes-dec for React Native Hermes reverse engineering.",
+    "options": {
+        "uv_version": {
+            "type": "string",
+            "default": "0.10.9",
+            "proposals": ["0.10.9", "0.11.6"],
+            "description": "uv standalone installer version"
+        },
+        "hermes_dec_version": {
+            "type": "string",
+            "default": "0.1.0",
+            "proposals": ["0.1.0"],
+            "description": "hermes-dec PyPI version"
+        }
+    },
+    "dependsOn": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts",
+            "pnpmVersion": "none",
+            "nodeGypDependencies": false
+        }
+    },
+    "installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

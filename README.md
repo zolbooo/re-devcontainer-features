@@ -5,16 +5,18 @@ Collection of `.devcontainer` features for reverse engineering. A fork of [Nordc
 ## Table of Contents
 
 - [General](#general)
-  - [Ghidra](#ghidra)
-  - [Radare2](#radare2)
-  - [Frida](#frida)
+    - [Ghidra](#ghidra)
+    - [Radare2](#radare2)
+    - [Frida](#frida)
 - [Android](#android)
-  - [Android SDK](#android-sdk)
-  - [Android NDK](#android-ndk)
-  - [Apktool](#apktool)
-  - [JADX](#jadx)
+    - [Android SDK](#android-sdk)
+    - [Android NDK](#android-ndk)
+    - [Apktool](#apktool)
+    - [JADX](#jadx)
 - [Flutter](#flutter)
-  - [Blutter](#blutter)
+    - [Blutter](#blutter)
+- [Frameworks](#frameworks)
+    - [React Native](#react-native-feature)
 
 ## General
 
@@ -55,3 +57,9 @@ Install JADX CLI and GUI from official GitHub releases. [View source](https://gi
 ### <a id="blutter">`ghcr.io/zolbooo/re-devcontainer-features/blutter:1`</a>
 
 Install Blutter - Flutter reverse engineering tool from source. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/blutter).
+
+## Frameworks
+
+### <a id="react-native-feature">`ghcr.io/zolbooo/re-devcontainer-features/react-native:1`</a>
+
+Install Node.js, uv, and hermes-dec for React Native Hermes reverse engineering. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/react-native).
