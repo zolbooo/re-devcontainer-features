@@ -35,9 +35,9 @@ Install Frida CLI/tools and Android Frida server or gadget artifacts. [View sour
 
 ## Android
 
-### <a id="android-sdk">`ghcr.io/zolbooo/re-devcontainer-features/android-sdk:1`</a>
+### <a id="android-sdk">`ghcr.io/zolbooo/re-devcontainer-features/android-sdk:2`</a>
 
-Setup and update the Android SDK. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/android-sdk).
+Setup and update the Android SDK with Google's Android CLI. [View source](https://github.com/zolbooo/re-devcontainer-features/tree/main/src/android-sdk).
 
 ### <a id="android-ndk">`ghcr.io/zolbooo/re-devcontainer-features/android-ndk:1`</a>
 

@@ -1,23 +1,32 @@
 
 # Android SDK (android-sdk)
 
-Install Android SDK `cmdline-tools`, `platform-tools`, and, `build-tools`.
+Install Android SDK packages and emulators using Google's Android CLI.
 
 ## Example Usage
 
 ```json
 "features": {
-    "ghcr.io/zolbooo/re-devcontainer-features/android-sdk:1": {}
+    "ghcr.io/zolbooo/re-devcontainer-features/android-sdk:2": {}
 }
 ```
 
 ```json
 "features": {
-    "ghcr.io/zolbooo/re-devcontainer-features/android-sdk:1": {
-        "wanted_emulators": "pixel34=system-images;android-34;google_apis;x86_64"
+    "ghcr.io/zolbooo/re-devcontainer-features/android-sdk:2": {
+        "wanted_emulators": "medium_phone"
     }
 }
 ```
+
+The supported automation surface is the `android` CLI:
+
+```sh
+android --sdk "$ANDROID_HOME" sdk list "platform-tools*"
+android --sdk "$ANDROID_HOME" emulator list --long
+```
+
+`wanted_emulators` now accepts Android CLI emulator profiles instead of `name=system-image-package` entries.
 
 ## Options
 
@@ -27,7 +36,7 @@ Install Android SDK `cmdline-tools`, `platform-tools`, and, `build-tools`.
 | build_tools | SDK build-tools version | string | 34.0.0 |
 | base_packages | packages will override default packages, split by space | string | - |
 | extra_packages | extra packages, split by space | string | - |
-| wanted_emulators | space-separated entries in name=system-image-package format | string | - |
+| wanted_emulators | space-separated Android CLI emulator profiles such as 'medium_phone small_phone' | string | - |
 
 
 

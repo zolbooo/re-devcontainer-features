@@ -12,11 +12,11 @@
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
         "features": {
             "android-sdk": {
-                "wanted_emulators": "pixel34=system-images;android-34;google_apis;x86_64"
+                "wanted_emulators": "medium_phone"
             }
         }
     },
-    "preexisting_latest": {
+    "preexisting_android_cli": {
         "build": {
             "dockerfile": "Dockerfile",
             "context": "."

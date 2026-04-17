@@ -1,9 +1,9 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 set +H
 
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-URL_SDK="https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip"
+ANDROID_CLI_INSTALL_URL="https://dl.google.com/android/cli/latest/linux_x86_64/install.sh"
 
 # Options.
 if [ -z "$PLATFORM" ]; then
@@ -20,6 +20,11 @@ fi
 if [ -n "$EXTRA_PACKAGES" ]; then
     IFS=' ' read -ra extra <<< "$EXTRA_PACKAGES"
     PACKAGES=("${PACKAGES[@]}" "${extra[@]}")
+fi
+
+if [ "$(uname -s)" != "Linux" ] || [ "$(uname -m)" != "x86_64" ]; then
+    echo "ERROR: The Android CLI installer used by this feature currently supports only Linux x86_64." >&2
+    exit 1
 fi
 
 EMULATOR_RUNTIME_PACKAGES=()
@@ -71,60 +76,66 @@ fi
 
 DEBIAN_FRONTEND="noninteractive" sudo apt install --no-install-recommends -y \
     openjdk-17-jdk-headless \
-    unzip \
-    wget \
+    curl \
     usbutils \
     "${EMULATOR_RUNTIME_PACKAGES[@]}"
 sudo apt clean
 
-# Prepare install folder.
-mkdir -p "$ANDROID_HOME"
-chown -R "$_REMOTE_USER:$_REMOTE_USER" "$ANDROID_HOME"
+REMOTE_HOME="$(getent passwd "$_REMOTE_USER" | cut -d: -f6)"
+if [ -z "$REMOTE_HOME" ]; then
+    echo "ERROR: Unable to determine home directory for remote user '$_REMOTE_USER'." >&2
+    exit 1
+fi
 
-su - "$_REMOTE_USER"
+REMOTE_CONFIG_HOME="$REMOTE_HOME/.config"
+REMOTE_CACHE_HOME="$REMOTE_HOME/.cache"
+REMOTE_ANDROID_USER_HOME="$REMOTE_HOME/.android"
+REMOTE_AVD_HOME="$REMOTE_ANDROID_USER_HOME/avd"
 
-export ANDROID_AVD_HOME="${ANDROID_AVD_HOME:-$ANDROID_HOME/avd}"
-mkdir -p "$ANDROID_AVD_HOME"
+sudo install -d -m 0755 -o "$_REMOTE_USER" -g "$_REMOTE_USER" \
+    "$ANDROID_HOME" \
+    "$REMOTE_CONFIG_HOME" \
+    "$REMOTE_CACHE_HOME" \
+    "$REMOTE_ANDROID_USER_HOME" \
+    "$REMOTE_AVD_HOME"
 
-cd "$ANDROID_HOME"
-
-tmp_dir="$(mktemp -d)"
-wget -q "$URL_SDK" -O "$tmp_dir/sdk.zip"
-unzip -q "$tmp_dir/sdk.zip" -d "$tmp_dir"
-
-# Replace cmdline-tools/latest atomically to avoid mv collisions when the directory already exists.
-mkdir -p "$ANDROID_HOME/cmdline-tools"
-rm -rf "$ANDROID_HOME/cmdline-tools/latest"
-mv "$tmp_dir/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
-rm -rf "$tmp_dir"
-
-cd "$ANDROID_HOME"
-
-export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+curl -fsSL "$ANDROID_CLI_INSTALL_URL" | bash
 
 # Save original JAVA_HOME.
-OG_JAVA_HOME=$JAVA_HOME
+OG_JAVA_HOME="${JAVA_HOME:-}"
 
 # thanks https://askubuntu.com/questions/772235/how-to-find-path-to-java#comment2258200_1029326.
-export JAVA_HOME=$(dirname $(dirname $(update-alternatives --list javac 2>&1 | head -n 1)))
+export JAVA_HOME
+JAVA_HOME="$(dirname "$(dirname "$(update-alternatives --list javac 2>&1 | head -n 1)")")"
 
-# TODO: Update everything to future-proof for the link getting stale.
-# yes | sdkmanager "cmdline-tools;latest"
-# Download the platform tools.
-yes | sdkmanager "${PACKAGES[@]}"
+run_as_remote_user() {
+    sudo -u "$_REMOTE_USER" env \
+        HOME="$REMOTE_HOME" \
+        XDG_CONFIG_HOME="$REMOTE_CONFIG_HOME" \
+        XDG_CACHE_HOME="$REMOTE_CACHE_HOME" \
+        ANDROID_HOME="$ANDROID_HOME" \
+        ANDROID_SDK_ROOT="$ANDROID_HOME" \
+        ANDROID_AVD_HOME="$REMOTE_AVD_HOME" \
+        JAVA_HOME="$JAVA_HOME" \
+        PATH="/usr/local/bin:$PATH" \
+        "$@"
+}
+
+run_as_remote_user /usr/local/bin/android --no-metrics --sdk "$ANDROID_HOME" sdk install "${PACKAGES[@]}"
 
 if [ -n "${WANTED_EMULATORS:-}" ]; then
-    "$SCRIPT_DIR/setup-emulators.sh"
+    run_as_remote_user "$SCRIPT_DIR/setup-emulators.sh"
 fi
 
 # Restore JAVA_HOME.
-export JAVA_HOME=$OG_JAVA_HOME
+export JAVA_HOME="$OG_JAVA_HOME"
 
 # Expose a stable build-tools path for PATH exports.
 sudo ln -sfn "$ANDROID_HOME/build-tools/$BUILD_TOOLS" /usr/local/lib/android-build-tools
 
-# Make sure the Android SDK has the correct permissions.
-sudo chown -R "$_REMOTE_USER:$_REMOTE_USER" "$ANDROID_HOME"
-
-# Exist subshell.
-exit
+# Make sure the Android SDK and Android CLI state directories have the correct permissions.
+sudo chown -R "$_REMOTE_USER:$_REMOTE_USER" \
+    "$ANDROID_HOME" \
+    "$REMOTE_CONFIG_HOME" \
+    "$REMOTE_CACHE_HOME" \
+    "$REMOTE_ANDROID_USER_HOME"

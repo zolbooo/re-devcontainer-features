@@ -1,13 +1,13 @@
 {
     "name": "Android SDK",
     "id": "android-sdk",
-    "version": "1.4.1",
-    "description": "Install Android SDK `cmdline-tools`, `platform-tools`, and, `build-tools`.",
+    "version": "2.0.0",
+    "description": "Install Android SDK packages and emulators using Google's Android CLI.",
     "containerEnv": {
         "ANDROID_HOME": "/usr/local/lib/android",
         "ANDROID_SDK_ROOT": "$ANDROID_HOME",
-        "ANDROID_AVD_HOME": "$ANDROID_HOME/avd",
-        "PATH": "$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:/usr/local/lib/android-build-tools"
+        "ANDROID_AVD_HOME": "$HOME/.android/avd",
+        "PATH": "$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:/usr/local/lib/android-build-tools"
     },
     "options": {
         "platform": {
@@ -33,7 +33,7 @@
         "wanted_emulators": {
             "type": "string",
             "default": "",
-            "description": "space-separated entries in name=system-image-package format"
+            "description": "space-separated Android CLI emulator profiles such as 'medium_phone small_phone'"
         }
     },
     "installsAfter": ["ghcr.io/devcontainers/features/common-utils", "ghcr.io/akhildevelops/devcontainer-features/apt"]
