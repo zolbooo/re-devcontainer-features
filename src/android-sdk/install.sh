@@ -148,6 +148,8 @@ sudo chown -R "$_REMOTE_USER:$_REMOTE_USER" \
     "$REMOTE_CACHE_HOME" \
     "$REMOTE_ANDROID_USER_HOME"
 
-# Android CLI extracts SDK tools with owner-only execute bits. Normalize modes so
-# feature consumers and test users can execute installed binaries from PATH.
-sudo chmod -R a+rX "$ANDROID_HOME"
+# Android CLI mutates SDK-local metadata under "$ANDROID_HOME/.sdk" even for
+# read-like commands such as "sdk list". Keep the SDK tree writable so whichever
+# user invokes the CLI in the container can refresh that metadata and install
+# packages later without hitting AccessDeniedException.
+sudo chmod -R a+rwX "$ANDROID_HOME"
