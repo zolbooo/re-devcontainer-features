@@ -99,6 +99,13 @@ sudo install -d -m 0755 -o "$_REMOTE_USER" -g "$_REMOTE_USER" \
     "$REMOTE_ANDROID_USER_HOME" \
     "$REMOTE_AVD_HOME"
 
+# The feature metadata exports ANDROID_AVD_HOME via "$HOME/.android/avd", but the
+# generated container env may resolve $HOME before the remote user's shell runs.
+# Provide a stable compatibility path so ANDROID_AVD_HOME=/.android/avd still
+# points at the remote user's actual AVD directory.
+sudo install -d -m 0755 /.android
+sudo ln -sfn "$REMOTE_AVD_HOME" /.android/avd
+
 curl -fsSL "$ANDROID_CLI_INSTALL_URL" | bash
 
 # Save original JAVA_HOME.
@@ -116,6 +123,7 @@ run_as_remote_user() {
         ANDROID_HOME="$ANDROID_HOME" \
         ANDROID_SDK_ROOT="$ANDROID_HOME" \
         ANDROID_AVD_HOME="$REMOTE_AVD_HOME" \
+        WANTED_EMULATORS="${WANTED_EMULATORS:-}" \
         JAVA_HOME="$JAVA_HOME" \
         PATH="/usr/local/bin:$PATH" \
         "$@"
@@ -139,3 +147,7 @@ sudo chown -R "$_REMOTE_USER:$_REMOTE_USER" \
     "$REMOTE_CONFIG_HOME" \
     "$REMOTE_CACHE_HOME" \
     "$REMOTE_ANDROID_USER_HOME"
+
+# Android CLI extracts SDK tools with owner-only execute bits. Normalize modes so
+# feature consumers and test users can execute installed binaries from PATH.
+sudo chmod -R a+rX "$ANDROID_HOME"
