@@ -1,7 +1,7 @@
 {
     "name": "Android SDK",
     "id": "android-sdk",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Install Android SDK packages and emulators using Google's Android CLI.",
     "containerEnv": {
         "ANDROID_HOME": "/usr/local/lib/android",
